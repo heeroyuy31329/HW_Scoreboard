@@ -13,6 +13,8 @@
 		0A75DF2A26B1B9BB0091E74E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A75DF2826B1B9BB0091E74E /* Main.storyboard */; };
 		0A75DF2C26B1B9BC0091E74E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A75DF2B26B1B9BC0091E74E /* Assets.xcassets */; };
 		0A75DF2F26B1B9BC0091E74E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A75DF2D26B1B9BC0091E74E /* LaunchScreen.storyboard */; };
+		0AE893E026B1BBFD00E681CB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE893DF26B1BBFD00E681CB /* Player.swift */; };
+		0AE893E226B1BD4200E681CB /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE893E126B1BD4200E681CB /* Step.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		0A75DF2B26B1B9BC0091E74E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A75DF2E26B1B9BC0091E74E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A75DF3026B1B9BC0091E74E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0AE893DF26B1BBFD00E681CB /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		0AE893E126B1BD4200E681CB /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		0A75DF2126B1B9BB0091E74E /* HW_Scoreboard */ = {
 			isa = PBXGroup;
 			children = (
+				0AE893DE26B1BB6800E681CB /* bean */,
 				0A75DF2226B1B9BB0091E74E /* AppDelegate.swift */,
 				0A75DF2426B1B9BB0091E74E /* SceneDelegate.swift */,
 				0A75DF2626B1B9BB0091E74E /* ViewController.swift */,
@@ -65,6 +70,15 @@
 				0A75DF3026B1B9BC0091E74E /* Info.plist */,
 			);
 			path = HW_Scoreboard;
+			sourceTree = "<group>";
+		};
+		0AE893DE26B1BB6800E681CB /* bean */ = {
+			isa = PBXGroup;
+			children = (
+				0AE893DF26B1BBFD00E681CB /* Player.swift */,
+				0AE893E126B1BD4200E681CB /* Step.swift */,
+			);
+			path = bean;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +151,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AE893E026B1BBFD00E681CB /* Player.swift in Sources */,
 				0A75DF2726B1B9BB0091E74E /* ViewController.swift in Sources */,
+				0AE893E226B1BD4200E681CB /* Step.swift in Sources */,
 				0A75DF2326B1B9BB0091E74E /* AppDelegate.swift in Sources */,
 				0A75DF2526B1B9BB0091E74E /* SceneDelegate.swift in Sources */,
 			);
