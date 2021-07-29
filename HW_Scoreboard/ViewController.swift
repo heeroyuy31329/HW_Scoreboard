@@ -71,17 +71,48 @@ class ViewController: UIViewController {
         showStep()
     }
     
+    @IBAction func setName(_ sender: Any) {
+        let alertController = UIAlertController(title: "設定名稱", message: "請輸入雙方名稱", preferredStyle: .alert)
+        
+        // 設定兩個textField來輸入雙方名字
+        alertController.addTextField { textField in
+            textField.placeholder = "左側的名字"
+        }
+        
+        alertController.addTextField { textField in
+            textField.placeholder = "右側的名字"
+        }
+        
+        // 設定按鈕
+        let ok = UIAlertAction(title: "OK", style: .default) { alertAction in
+            self.addStep()
+            
+            let step = self.stepList.last
+            step?.playerL?.name = alertController.textFields?[0].text ?? ""
+            step?.playerR?.name = alertController.textFields?[1].text ?? ""
+            
+            self.showStep()
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(ok)
+        alertController.addAction(cancel)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     // MARK: Function
     func makeFirstStep() {
         let playerL = Player()
-        playerL.name = "123"
+        playerL.name = ""
         playerL.win = 0
         playerL.score = 0
         playerL.serve = true
         playerL.color = UIColor(red: 0.276, green: 0.464, blue: 0.933, alpha: 1)
         
         let playerR = Player()
-        playerR.name = "456"
+        playerR.name = ""
         playerR.win = 0
         playerR.score = 0
         playerR.serve = false
@@ -112,8 +143,8 @@ class ViewController: UIViewController {
         view.backgroundColor = step!.playerL!.serve ? step!.playerL!.color : step!.playerR!.color
     }
     
-    func addScore(side: Side) {
-        // 利用前一步來做計算
+    func addStep() {
+        // 複製前一步
         let lastStep = stepList.last
         
         // 每次增加一個新的step
@@ -131,13 +162,6 @@ class ViewController: UIViewController {
         playerR.serve = lastStep!.playerR!.serve
         playerR.color = lastStep!.playerR!.color
         
-        switch side {
-        case .Left:
-            playerL.score += 1
-        case .Right:
-            playerR.score += 1
-        }
-        
         let step = Step()
         step.playerL = playerL
         step.playerR = playerR
@@ -145,7 +169,20 @@ class ViewController: UIViewController {
         
         // 加入新的一步
         stepList.append(step)
+    }
+    
+    func addScore(side: Side) {
+        addStep()
         
+        let lastStep = stepList.last
+
+        switch side {
+        case .Left:
+            lastStep!.playerL!.score += 1
+        case .Right:
+            lastStep!.playerR!.score += 1
+        }
+                
         checkWin()
         changeBall()
         showStep()
