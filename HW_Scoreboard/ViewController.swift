@@ -133,12 +133,14 @@ class ViewController: UIViewController {
         scoreL.setTitle("\(step!.playerL!.score)", for: .normal)
         winL.text = "\(step!.playerL!.win)"
         nameL.text = step!.playerL!.name
-        serveL.isHidden = !step!.playerL!.serve
+//        serveL.isHidden = !step!.playerL!.serve
+        serveL.text = step!.playerL!.serve ? "Serve" : ""
         
         scoreR.setTitle("\(step!.playerR!.score)", for: .normal)
         winR.text = "\(step!.playerR!.win)"
         nameR.text = step!.playerR!.name
-        serveR.isHidden = !step!.playerR!.serve
+//        serveR.isHidden = !step!.playerR!.serve
+        serveR.text = step!.playerR!.serve ? "Serve" : ""
         
         view.backgroundColor = step!.playerL!.serve ? step!.playerL!.color : step!.playerR!.color
     }
