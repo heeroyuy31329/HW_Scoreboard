@@ -33,23 +33,42 @@ class ViewController: UIViewController {
 
     // MARK: Action
     @IBAction func addScoreL(_ sender: Any) {
-    
+        addScore(side: .Left)
     }
     
     @IBAction func addScoreR(_ sender: Any) {
-    
+        addScore(side: .Right)
     }
     
     @IBAction func rewind(_ sender: Any) {
-    
+        if(stepList.count > 1) {
+            stepList.removeLast()
+            
+            showStep()
+        }
     }
     
     @IBAction func changeSide(_ sender: Any) {
-    
+        let lastStep = stepList.last
+        
+        // 兩邊交換
+        let step = Step()
+        step.playerL = lastStep!.playerR
+        step.playerR = lastStep!.playerL
+        step.isdeuce = lastStep!.isdeuce
+        
+        // 加入新的一步
+        stepList.append(step)
+        
+        showStep()
     }
     
     @IBAction func reset(_ sender: Any) {
-
+        stepList.removeAll()
+        
+        makeFirstStep()
+        
+        showStep()
     }
     
     // MARK: Function
@@ -71,6 +90,7 @@ class ViewController: UIViewController {
         let step = Step()
         step.playerL = playerL
         step.playerR = playerR
+        step.isdeuce = false
         
         // 加入第一步
         stepList.append(step)
@@ -79,17 +99,54 @@ class ViewController: UIViewController {
     func showStep() {
         let step = stepList.last
         
-        scoreL.titleLabel?.text = "\(step!.playerL!.score)"
+        scoreL.setTitle("\(step!.playerL!.score)", for: .normal)
         winL.text = "\(step!.playerL!.win)"
         nameL.text = step!.playerL!.name
         serveL.isHidden = !step!.playerL!.serve
         
-        scoreR.titleLabel?.text = "\(step!.playerR!.score)"
+        scoreR.setTitle("\(step!.playerR!.score)", for: .normal)
         winR.text = "\(step!.playerR!.win)"
         nameR.text = step!.playerR!.name
         serveR.isHidden = !step!.playerR!.serve
         
         view.backgroundColor = step!.playerL!.serve ? step!.playerL!.color : step!.playerR!.color
+    }
+    
+    func addScore(side: Side) {
+        // 利用前一步來做計算
+        let lastStep = stepList.last
+        
+        // 每次增加一個新的step
+        let playerL = Player()
+        playerL.name = lastStep!.playerL!.name
+        playerL.win = lastStep!.playerL!.win
+        playerL.score = lastStep!.playerL!.score
+        playerL.serve = lastStep!.playerL!.serve
+        playerL.color = lastStep!.playerL!.color
+        
+        let playerR = Player()
+        playerR.name = lastStep!.playerR!.name
+        playerR.win = lastStep!.playerR!.win
+        playerR.score = lastStep!.playerR!.score
+        playerR.serve = lastStep!.playerR!.serve
+        playerR.color = lastStep!.playerR!.color
+        
+        switch side {
+        case .Left:
+            playerL.score += 1
+        case .Right:
+            playerR.score += 1
+        }
+        
+        let step = Step()
+        step.playerL = playerL
+        step.playerR = playerR
+        step.isdeuce = lastStep!.isdeuce
+        
+        // 加入新的一步
+        stepList.append(step)
+        
+        showStep()
     }
 }
 
