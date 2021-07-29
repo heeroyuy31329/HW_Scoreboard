@@ -146,7 +146,65 @@ class ViewController: UIViewController {
         // 加入新的一步
         stepList.append(step)
         
+        checkWin()
+        changeBall()
         showStep()
+    }
+    
+    func checkWin() {
+        let lastStep = stepList.last
+        
+        if (lastStep!.isdeuce) {
+            // deuces局
+            let scoreDif = lastStep!.playerL!.score - lastStep!.playerR!.score
+            
+            if (scoreDif == 2) {
+                // 左方贏一局
+                lastStep!.playerL!.win += 1
+                lastStep!.playerL!.score = 0
+                lastStep!.playerR!.score = 0
+                lastStep!.isdeuce = false
+            } else if (scoreDif == -2) {
+                // 右方贏一局
+                lastStep!.playerR!.win += 1
+                lastStep!.playerL!.score = 0
+                lastStep!.playerR!.score = 0
+                lastStep!.isdeuce = false
+            }
+        } else {
+            // 非deuce局
+            if (lastStep!.playerL!.score == 11) {
+                // 左方贏一局
+                lastStep!.playerL!.win += 1
+                lastStep!.playerL!.score = 0
+                lastStep!.playerR!.score = 0
+            } else if (lastStep!.playerR!.score == 11) {
+                // 右方贏一局
+                lastStep!.playerR!.win += 1
+                lastStep!.playerL!.score = 0
+                lastStep!.playerR!.score = 0
+            } else if (lastStep!.playerL!.score == 10 && lastStep!.playerR!.score == 10){
+                // 進入deuce局
+                lastStep!.isdeuce = true
+            }
+        }
+    }
+    
+    func changeBall() {
+        let lastStep = stepList.last
+        
+        if (lastStep!.isdeuce) {
+            lastStep!.playerR!.serve = !lastStep!.playerR!.serve
+            lastStep!.playerL!.serve = !lastStep!.playerL!.serve
+        } else {
+            let ballCount = lastStep!.playerL!.score + lastStep!.playerR!.score
+            
+            // 每兩球換邊
+            if (ballCount % 2 == 0) {
+                lastStep!.playerR!.serve = !lastStep!.playerR!.serve
+                lastStep!.playerL!.serve = !lastStep!.playerL!.serve
+            }
+        }
     }
 }
 
