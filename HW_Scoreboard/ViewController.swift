@@ -133,14 +133,16 @@ class ViewController: UIViewController {
         scoreL.setTitle("\(step!.playerL!.score)", for: .normal)
         winL.text = "\(step!.playerL!.win)"
         nameL.text = step!.playerL!.name
+        // isHidden會消失，導致auto layout出錯
 //        serveL.isHidden = !step!.playerL!.serve
-        serveL.text = step!.playerL!.serve ? "Serve" : ""
+        // 設定alpha會保留位置，只是看不到
+        serveL.alpha = step!.playerL!.serve ? 1.0 : 0.0
         
         scoreR.setTitle("\(step!.playerR!.score)", for: .normal)
         winR.text = "\(step!.playerR!.win)"
         nameR.text = step!.playerR!.name
 //        serveR.isHidden = !step!.playerR!.serve
-        serveR.text = step!.playerR!.serve ? "Serve" : ""
+        serveR.alpha = step!.playerR!.serve ? 1.0 : 0.0
         
         view.backgroundColor = step!.playerL!.serve ? step!.playerL!.color : step!.playerR!.color
     }
