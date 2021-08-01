@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         let step = Step()
         step.playerL = lastStep!.playerR
         step.playerR = lastStep!.playerL
-        step.isdeuce = lastStep!.isdeuce
+        step.isDeuce = lastStep!.isDeuce
         
         // 加入新的一步
         stepList.append(step)
@@ -121,7 +121,7 @@ class ViewController: UIViewController {
         let step = Step()
         step.playerL = playerL
         step.playerR = playerR
-        step.isdeuce = false
+        step.isDeuce = false
         
         // 加入第一步
         stepList.append(step)
@@ -169,7 +169,7 @@ class ViewController: UIViewController {
         let step = Step()
         step.playerL = playerL
         step.playerR = playerR
-        step.isdeuce = lastStep!.isdeuce
+        step.isDeuce = lastStep!.isDeuce
         
         // 加入新的一步
         stepList.append(step)
@@ -195,7 +195,7 @@ class ViewController: UIViewController {
     func checkWin() {
         let lastStep = stepList.last
         
-        if (lastStep!.isdeuce) {
+        if (lastStep!.isDeuce) {
             // deuces局
             let scoreDif = lastStep!.playerL!.score - lastStep!.playerR!.score
             
@@ -204,13 +204,13 @@ class ViewController: UIViewController {
                 lastStep!.playerL!.win += 1
                 lastStep!.playerL!.score = 0
                 lastStep!.playerR!.score = 0
-                lastStep!.isdeuce = false
+                lastStep!.isDeuce = false
             } else if (scoreDif == -2) {
                 // 右方贏一局
                 lastStep!.playerR!.win += 1
                 lastStep!.playerL!.score = 0
                 lastStep!.playerR!.score = 0
-                lastStep!.isdeuce = false
+                lastStep!.isDeuce = false
             }
         } else {
             // 非deuce局
@@ -226,7 +226,7 @@ class ViewController: UIViewController {
                 lastStep!.playerR!.score = 0
             } else if (lastStep!.playerL!.score == 10 && lastStep!.playerR!.score == 10){
                 // 進入deuce局
-                lastStep!.isdeuce = true
+                lastStep!.isDeuce = true
             }
         }
     }
@@ -234,7 +234,7 @@ class ViewController: UIViewController {
     func changeBall() {
         let lastStep = stepList.last
         
-        if (lastStep!.isdeuce) {
+        if (lastStep!.isDeuce) {
             lastStep!.playerR!.serve = !lastStep!.playerR!.serve
             lastStep!.playerL!.serve = !lastStep!.playerL!.serve
         } else {

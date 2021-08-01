@@ -10,5 +10,5 @@ import Foundation
 class Step {
     var playerL: Player?
     var playerR: Player?
-    var isdeuce = false
+    var isDeuce = false
 }
